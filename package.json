@@ -46,16 +46,21 @@
     "autoprefixer-core": "5.1.0",
     "postcss": "4.0.6",
     "postcss-import": "5.0.3",
+    "postcss-url": "2.0.2",
     "stylus": "0.50.0",
     "vow": "0.4.8"
   },
   "devDependencies": {
     "enb": ">=0.8.43 <1.0.0",
     "jscs": "1.11.3",
-    "jshint": "2.6.0"
+    "jshint": "2.6.0",
+    "mocha": "2.1.0",
+    "mock-fs": "2.5.0",
+    "must": "0.12.0"
   },
   "scripts": {
-    "test": "npm run lint",
-    "lint": "jshint . && jscs ."
+    "test": "npm run lint && npm run unit",
+    "lint": "jshint . && jscs .",
+    "unit": "mocha test/run.js"
   }
 }
