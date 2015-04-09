@@ -26,13 +26,16 @@ module.exports = require('enb/techs/css').buildFlow()
     .defineOption('compress', false)
     .defineOption('prefix', '')
     .defineOption('variables')
-    .useFileList(['css', 'styl'])
+    .defineOption('sourceSuffixes', ['css', 'styl'])
+    .useSourceResult('filesTarget', '?.files')
     .builder(function (sourceFiles) {
         var _this = this;
         var filename = this.node.resolvePath(this._target);
         var defer = vow.defer();
 
-        var css = sourceFiles.map(function (file) {
+        var css = sourceFiles.items.filter(function (item) {
+            return this._sourceSuffixes.indexOf(item.suffix) > -1;
+        }, this).map(function (file) {
             var path = _this.node.relativePath(file.fullname);
             if (file.name.indexOf('.styl') !== -1) {
                 return '/* ' + path + ':begin */\n' +
